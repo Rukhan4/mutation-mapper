@@ -1,5 +1,6 @@
 def parse_mutation_file(file):
     mutations = []
+    file.seek(0)  # rewind file pointer
     for line in file:
         if isinstance(line, bytes):
             line = line.decode("utf-8")
