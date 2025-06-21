@@ -43,7 +43,6 @@ def upload_file():
         import traceback
         traceback.print_exc()
         return jsonify({"error": "Internal Server Error", "message": str(e)}), 500
-import os
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
