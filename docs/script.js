@@ -12,7 +12,7 @@ function upload() {
   const formData = new FormData();
   formData.append("file", file);
 
-  fetch("https://mutation-mapper-backend.onrender.com/upload", {
+  fetch("https://mutation-mapper-2.onrender.com", {
   method: "POST",
   body: formData
 })
