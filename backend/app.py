@@ -11,30 +11,38 @@ ANNOTATION_PATH = os.path.join("data", "mutation_annotations.json")
 
 @app.route("/upload", methods=["POST"])
 def upload_file():
-    if "file" not in request.files:
-        return "No file uploaded", 400
-    file = request.files["file"]
+    try:
+        if "file" not in request.files:
+            return jsonify({"error": "No file uploaded"}), 400
+        file = request.files["file"]
 
-    mutations = parse_mutation_file(file)
+        print("Received file:", file.filename)
+        file.seek(0)
+        print("File preview:\n", file.read(200))
+        file.seek(0)
 
-    with open(ANNOTATION_PATH, "r") as f:
-        annotations = json.load(f)
+        mutations = parse_mutation_file(file)
 
-    results = []
-    for mutation in mutations:
-        key = f"{mutation['gene']}:{mutation['mutation']}"
-        data = annotations.get(key)
-        if data:
+        with open("data/mutation_annotations.json", "r") as f:
+            annotations = json.load(f)
+
+        results = []
+        for m in mutations:
+            key = f"{m['gene']}:{m['mutation']}"
+            data = annotations.get(key, {})
             results.append({
-                "gene": mutation["gene"],
-                "mutation": mutation["mutation"],
-                "type": data["type"],
-                "significance": data["significance"],
-                "disease": data["disease"]
+                "gene": m["gene"],
+                "mutation": m["mutation"],
+                "type": data.get("type", "unknown"),
+                "significance": data.get("significance", "unknown"),
+                "disease": data.get("disease", "unknown")
             })
 
-    return jsonify(results)
-
+        return jsonify(results)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": "Internal Server Error", "message": str(e)}), 500
 import os
 
 if __name__ == "__main__":
