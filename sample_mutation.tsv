@@ -1,0 +1,5 @@
+#chr	position	gene	mutation	significance
+chr17	41276045	BRCA1	c.68_69delAG	Pathogenic
+chr12	25398285	KRAS	c.35G>T	Somatic
+chr13	32936732	BRCA2	c.5946delT	Pathogenic
+chr17	43045727	TP53	c.215C>G	Pathogenic
