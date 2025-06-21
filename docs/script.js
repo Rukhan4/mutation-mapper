@@ -72,3 +72,8 @@ function clearAll() {
   const filter = document.getElementById("significanceFilter");
   if (filter) filter.value = "all";
 }
+
+
+
+window.clearAll = clearAll;
+window.upload = upload;
