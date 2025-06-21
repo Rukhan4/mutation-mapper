@@ -1,0 +1,17 @@
+{
+  "BRCA1:c.68_69delAG": {
+    "type": "frameshift",
+    "significance": "Pathogenic",
+    "disease": "Hereditary breast and ovarian cancer"
+  },
+  "KRAS:c.35G>T": {
+    "type": "missense",
+    "significance": "Somatic",
+    "disease": "Colorectal cancer"
+  },
+  "BRCA2:c.5946delT": {
+    "type": "frameshift",
+    "significance": "Pathogenic",
+    "disease": "Breast cancer"
+  }
+}
