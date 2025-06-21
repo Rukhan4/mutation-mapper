@@ -12,10 +12,11 @@ function upload() {
   const formData = new FormData();
   formData.append("file", file);
 
-  fetch("http://localhost:5000/upload", {
-    method: "POST",
-    body: formData
-  })
+  fetch("https://mutation-mapper-backend.onrender.com/upload", {
+  method: "POST",
+  body: formData
+})
+
     .then(res => res.json())
     .then(data => {
       status.textContent = `Found ${data.length} annotated mutations.`;
