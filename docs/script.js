@@ -61,3 +61,14 @@ function upload() {
       document.getElementById("resultTable").style.display = "none";
     });
 }
+
+function clearAll() {
+  document.getElementById("fileInput").value = "";
+  document.getElementById("status").textContent = "";
+  document.getElementById("resultTable").style.display = "none";
+  const tbody = document.querySelector("#resultTable tbody");
+  tbody.innerHTML = "";
+  // Also reset filter dropdown if you add it later
+  const filter = document.getElementById("significanceFilter");
+  if (filter) filter.value = "all";
+}
