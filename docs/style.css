@@ -1,53 +1,132 @@
+/* Reset some defaults */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: sans-serif;
-  background: #f3f3f3;
-  padding: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #80deea);
+  padding: 40px 20px;
+  margin: 0;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .container {
   background: white;
-  padding: 20px 30px;
-  border-radius: 8px;
-  max-width: 800px;
-  margin: auto;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
 h1 {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 2.6rem;
+  color: #00796b;
+  letter-spacing: 1.2px;
+}
+
+input[type="file"] {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1.8px solid #80deea;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+  border-color: #00796b;
 }
 
 button {
-  margin-left: 10px;
-  padding: 8px 16px;
+  margin-left: 15px;
+  padding: 10px 20px;
+  background: #00796b;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgb(0 121 107 / 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background: #004d40;
+  box-shadow: 0 6px 14px rgb(0 77 64 / 0.6);
+}
+
+#status {
+  margin-top: 20px;
+  font-style: italic;
+  color: #555;
+  min-height: 1.3em;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 30px;
+  font-size: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
 }
 
 th, td {
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
 }
 
 th {
-  background-color: #f5f5f5;
+  background-color: #004d40;
+  color: #e0f2f1;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 }
 
-#status {
-  margin-top: 10px;
-  color: #444;
+tbody tr:hover {
+  background-color: #b2dfdbcc;
+  cursor: default;
 }
-
 
 .pathogenic {
   color: #b22222; /* firebrick red */
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .benign {
   color: #228b22; /* forest green */
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 15px;
+  }
+
+  input[type="file"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
 }
