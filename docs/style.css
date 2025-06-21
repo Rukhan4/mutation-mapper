@@ -41,3 +41,13 @@ th {
   margin-top: 10px;
   color: #444;
 }
+
+
+.pathogenic {
+  color: #b22222; /* firebrick red */
+  font-weight: bold;
+}
+
+.benign {
+  color: #228b22; /* forest green */
+}

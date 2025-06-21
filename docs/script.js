@@ -40,7 +40,8 @@ function upload() {
         const tr = document.createElement("tr");
         // Color rows red if significance includes "pathogenic", else green
         const isPathogenic = row.significance.toLowerCase().includes("pathogenic");
-        tr.style.color = isPathogenic ? "red" : "green";
+        tr.classList.add(isPathogenic ? "pathogenic" : "benign");
+
 
         tr.innerHTML = `
           <td>${row.gene}</td>
