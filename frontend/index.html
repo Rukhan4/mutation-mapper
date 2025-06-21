@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mutation Mapper</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🧬 Mutation Mapper</h1>
+
+    <input type="file" id="fileInput" />
+    <button onclick="upload()">Upload & Analyze</button>
+
+    <div id="status"></div>
+
+    <table id="resultTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>Gene</th>
+          <th>Mutation</th>
+          <th>Type</th>
+          <th>Significance</th>
+          <th>Disease</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
