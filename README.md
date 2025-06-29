@@ -11,6 +11,7 @@ A web app to upload genomic mutation files (TSV) and view annotated mutation inf
 - Upload mutation files and get annotation results via a Flask REST API  
 - Color-coded pathogenic vs benign mutation display  
 - Real-time upload status and filtering by significance  
+- Graph of significance 
 - Hosted on Render for scalable deployment
 
 ## Tech Stack
