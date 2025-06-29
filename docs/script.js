@@ -27,6 +27,7 @@ function upload() {
       if (data.length === 0) {
         status.textContent = "No matches found.";
         document.getElementById("resultTable").style.display = "none";
+        clearChart();
         return;
       }
 
@@ -38,10 +39,8 @@ function upload() {
 
       data.forEach((row) => {
         const tr = document.createElement("tr");
-        // Color rows red if significance includes "pathogenic", else green
         const isPathogenic = row.significance.toLowerCase().includes("pathogenic");
         tr.classList.add(isPathogenic ? "pathogenic" : "benign");
-
 
         tr.innerHTML = `
           <td>${row.gene}</td>
@@ -54,11 +53,13 @@ function upload() {
       });
 
       table.style.display = "table";
+      renderGeneChart(data); // new visualization!
     })
     .catch((err) => {
       console.error(err);
       status.textContent = "An error occurred. Please try again.";
       document.getElementById("resultTable").style.display = "none";
+      clearChart();
     });
 }
 
@@ -70,9 +71,59 @@ function clearAll() {
   tbody.innerHTML = "";
   const filter = document.getElementById("significanceFilter");
   if (filter) filter.value = "all";
+  clearChart();
 }
 
+function renderGeneChart(data) {
+  const geneCounts = {};
 
+  data.forEach((row) => {
+    const gene = row.gene;
+    geneCounts[gene] = (geneCounts[gene] || 0) + 1;
+  });
+
+  const sortedGenes = Object.entries(geneCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10);
+
+  const labels = sortedGenes.map(([gene]) => gene);
+  const counts = sortedGenes.map(([_, count]) => count);
+
+  const ctx = document.getElementById("geneChart").getContext("2d");
+
+  if (window.geneChart) {
+    window.geneChart.destroy();
+  }
+
+  window.geneChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Mutation Count by Gene",
+        data: counts,
+        backgroundColor: "#4e79a7",
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "Top 10 Most Frequent Mutated Genes",
+        },
+      },
+    },
+  });
+}
+
+function clearChart() {
+  if (window.geneChart) {
+    window.geneChart.destroy();
+    window.geneChart = null;
+  }
+}
 
 window.clearAll = clearAll;
 window.upload = upload;
