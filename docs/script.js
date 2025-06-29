@@ -89,9 +89,11 @@ function renderGeneChart(data) {
   const labels = sortedGenes.map(([gene]) => gene);
   const counts = sortedGenes.map(([_, count]) => count);
 
-  const ctx = document.getElementById("geneChart").getContext("2d");
+  const canvas = document.getElementById("geneChart");
+  const ctx = canvas.getContext("2d");
 
-  if (window.geneChart) {
+  // ✅ Safely destroy the previous chart
+  if (window.geneChart instanceof Chart) {
     window.geneChart.destroy();
   }
 
@@ -119,11 +121,12 @@ function renderGeneChart(data) {
 }
 
 function clearChart() {
-  if (window.geneChart) {
+  if (window.geneChart instanceof Chart) {
     window.geneChart.destroy();
     window.geneChart = null;
   }
 }
+
 
 window.clearAll = clearAll;
 window.upload = upload;
