@@ -92,16 +92,16 @@ function renderGeneChart(data) {
   const canvas = document.getElementById("geneChart");
   const ctx = canvas.getContext("2d");
 
-  // ✅ SAFELY DESTROY IF A VALID CHART EXISTS
-  if (window.geneChart && typeof window.geneChart.destroy === "function") {
-    try {
-      window.geneChart.destroy();
-    } catch (e) {
-      console.warn("Chart destroy failed:", e);
-    }
+  // ✅ Ensure old chart is a valid Chart instance
+  if (!(window.geneChart instanceof Chart)) {
+    window.geneChart = null;
   }
 
-  // ✅ INSTANTIATE THE NEW CHART
+  if (window.geneChart && typeof window.geneChart.destroy === "function") {
+    window.geneChart.destroy();
+  }
+
+  // ✅ Now create the new chart
   window.geneChart = new Chart(ctx, {
     type: "bar",
     data: {
@@ -124,9 +124,10 @@ function renderGeneChart(data) {
     },
   });
 
-  // ✅ SHOW THE CANVAS IF HIDDEN
+  // Show the canvas if it was hidden
   canvas.style.display = "block";
 }
+
 
 function clearChart() {
   const canvas = document.getElementById("geneChart");
